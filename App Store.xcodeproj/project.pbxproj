@@ -14,6 +14,7 @@
 		C3297999227F4C0500B0ED6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3297997227F4C0500B0ED6D /* LaunchScreen.storyboard */; };
 		C32979A1227F4C6D00B0ED6D /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32979A0227F4C6D00B0ED6D /* BaseTabBarController.swift */; };
 		C32979A6228081EF00B0ED6D /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32979A5228081EF00B0ED6D /* SearchViewController.swift */; };
+		C32979A92281E83800B0ED6D /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32979A82281E83800B0ED6D /* SearchResultCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C329799A227F4C0500B0ED6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C32979A0227F4C6D00B0ED6D /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
 		C32979A5228081EF00B0ED6D /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C32979A82281E83800B0ED6D /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		C329798D227F4C0400B0ED6D /* App Store */ = {
 			isa = PBXGroup;
 			children = (
+				C32979A72281E81600B0ED6D /* Views */,
 				C32979A22280815B00B0ED6D /* Controller */,
 				C329798E227F4C0400B0ED6D /* AppDelegate.swift */,
 				C3297990227F4C0400B0ED6D /* ViewController.swift */,
@@ -76,6 +79,14 @@
 				C32979A5228081EF00B0ED6D /* SearchViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		C32979A72281E81600B0ED6D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C32979A82281E83800B0ED6D /* SearchResultCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +164,7 @@
 				C329798F227F4C0400B0ED6D /* AppDelegate.swift in Sources */,
 				C32979A6228081EF00B0ED6D /* SearchViewController.swift in Sources */,
 				C32979A1227F4C6D00B0ED6D /* BaseTabBarController.swift in Sources */,
+				C32979A92281E83800B0ED6D /* SearchResultCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
