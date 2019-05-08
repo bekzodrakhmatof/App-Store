@@ -22,33 +22,23 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         fetchItunesApps()
     }
     
+    fileprivate var appResults = [Result]()
+    
     fileprivate func fetchItunesApps() {
         
-        let urlSring = "https://itunes.apple.com/search?term=jack+johnson"
-        guard let url = URL(string: urlSring) else { return }
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
+        Service.shared.fetchApps { (results, error) in
             
-            // ERROR
             if let error = error {
+                
                 print("Failed to fetcg apps: ", error)
                 return
             }
             
-            // SUCCESS
-            guard let data = data else { return }
-            
-            do {
-                
-                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                searchResult.results.forEach({print($0.trackName, $0.primaryGenreName)})
-                
-            } catch {
-                
-                print("Failed to decode json: ", error)
+            self.appResults = results
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
-            
-            
-        }.resume()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -58,13 +48,17 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! SearchResultCell
         
-        cell.nameLabel.text = "Here is my app name"
+        let appResult = appResults[indexPath.item]
+        cell.nameLabel.text = appResult.trackName
+        cell.categoryLabel.text = appResult.primaryGenreName
+        cell.ratingLabel.text = "Rating: \(appResult.averageUserRating ?? 0)"
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        
+        return appResults.count
     }
     
     init() {
