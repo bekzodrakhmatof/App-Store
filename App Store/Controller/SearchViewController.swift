@@ -9,37 +9,62 @@
 import UIKit
 import SDWebImage
 
-class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     fileprivate let cellID = "searchCellID"
+    fileprivate var appResults = [Result]()
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
+    
+    fileprivate let enterSearchTermLabel: UILabel = {
+        
+        let label = UILabel()
+        label.text = "Please enter search term above..."
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.numberOfLines = 0
+        return label
+    }()
+    var timer: Timer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .white
-        
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: cellID)
-        
-        fetchItunesApps()
+        collectionView.addSubview(enterSearchTermLabel)
+        enterSearchTermLabel.fillSuperview(padding: .init(top: 150, left: 50, bottom: 0, right: 50))
+        setupSearchBar()
     }
     
-    fileprivate var appResults = [Result]()
-    
-    fileprivate func fetchItunesApps() {
+    fileprivate func setupSearchBar() {
         
-        Service.shared.fetchApps { (results, error) in
+        definesPresentationContext = true
+        navigationItem.searchController = self.searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        // Deleay half second when user types
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             
-            if let error = error {
+            Service.shared.fetchApps(searchTerm: searchText) { (results, error) in
                 
-                print("Failed to fetcg apps: ", error)
-                return
+                if let error = error {
+                    
+                    print("Failed to fetcg apps: ", error)
+                    return
+                }
+                
+                self.appResults = results
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             }
-            
-            self.appResults = results
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        })
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -56,6 +81,7 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        enterSearchTermLabel.isHidden = appResults.count != 0
         return appResults.count
     }
     
