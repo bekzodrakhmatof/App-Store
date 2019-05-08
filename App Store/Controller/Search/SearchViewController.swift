@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class SearchViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     fileprivate let cellID = "searchCellID"
     fileprivate var appResults = [Result]()
@@ -83,13 +83,5 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         
         enterSearchTermLabel.isHidden = appResults.count != 0
         return appResults.count
-    }
-    
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
