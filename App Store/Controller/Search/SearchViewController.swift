@@ -24,6 +24,7 @@ class SearchViewController: BaseCollectionViewController, UICollectionViewDelega
         label.numberOfLines = 0
         return label
     }()
+    
     var timer: Timer?
 
     override func viewDidLoad() {

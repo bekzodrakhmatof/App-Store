@@ -18,9 +18,9 @@ class AppsHorizontalViewController: BaseCollectionViewController, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .purple
+        collectionView.backgroundColor = .white
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellID)
         
         if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
             
@@ -34,17 +34,16 @@ class AppsHorizontalViewController: BaseCollectionViewController, UICollectionVi
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .red
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let height = (view.frame.height - 2 * topBottomPadding - 2 * lineSpacing) / 3
-        return .init(width: view.frame.width, height: height)
+        return .init(width: view.frame.width - 48, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: 16, bottom: 12, right: 16)
+        return .init(top: 12, left: 16, bottom: 12, right: 16)
     }
 }
