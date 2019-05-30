@@ -20,6 +20,22 @@ class AppsPageViewController: BaseCollectionViewController, UICollectionViewDele
         collectionView.register(AppsGroupCell.self, forCellWithReuseIdentifier: cellID)
         
         collectionView.register(AppsPageHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerID)
+        
+        fetchData()
+    }
+    
+    fileprivate func fetchData() {
+        
+        Service.shared.fetchGames { (appGroup, error) in
+            
+            if let error = error {
+                
+                print("Failed to fetch games: ", error)
+                return
+            }
+            
+            print(appGroup?.feed.results)
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
