@@ -14,7 +14,6 @@ class AppsHorizontalHeaderViewController: BaseCollectionViewController, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
         collectionView.backgroundColor = .white
         
         // Register cell classes
