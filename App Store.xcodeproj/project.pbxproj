@@ -29,6 +29,8 @@
 		C32979C82284222500B0ED6D /* AppsPageHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32979C72284222500B0ED6D /* AppsPageHeaderView.swift */; };
 		C32979CA228423AF00B0ED6D /* AppsHorizontalHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32979C9228423AF00B0ED6D /* AppsHorizontalHeaderViewController.swift */; };
 		C32979CC2284252B00B0ED6D /* AppHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C32979CB2284252B00B0ED6D /* AppHeaderCell.swift */; };
+		C390B0A222BB677200270A2B /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390B0A122BB677200270A2B /* HorizontalSnappingController.swift */; };
+		C390B0A422BB6C2F00270A2B /* SnappingLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390B0A322BB6C2F00270A2B /* SnappingLayout.swift */; };
 		C397170E22A024D200D9F832 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397170D22A024D200D9F832 /* AppGroup.swift */; };
 		C397171022A0366400D9F832 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397170F22A0366400D9F832 /* SocialApp.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +61,8 @@
 		C32979C72284222500B0ED6D /* AppsPageHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsPageHeaderView.swift; sourceTree = "<group>"; };
 		C32979C9228423AF00B0ED6D /* AppsHorizontalHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHorizontalHeaderViewController.swift; sourceTree = "<group>"; };
 		C32979CB2284252B00B0ED6D /* AppHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderCell.swift; sourceTree = "<group>"; };
+		C390B0A122BB677200270A2B /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
+		C390B0A322BB6C2F00270A2B /* SnappingLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnappingLayout.swift; sourceTree = "<group>"; };
 		C397170D22A024D200D9F832 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		C397170F22A0366400D9F832 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
 		F03FB8D4FD6CB9C7B2D91B4D /* Pods-App Store.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Store.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App Store/Pods-App Store.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 				C32979AB2282B25C00B0ED6D /* UIView+Layout.swift */,
 				C32979AD2282B65C00B0ED6D /* VerticalStackView.swift */,
 				C32979C4228346FA00B0ED6D /* Extensions.swift */,
+				C390B0A322BB6C2F00270A2B /* SnappingLayout.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 				C32979B52283382600B0ED6D /* AppsPageViewController.swift */,
 				C32979C022833E7800B0ED6D /* AppsHorizontalViewController.swift */,
 				C32979C9228423AF00B0ED6D /* AppsHorizontalHeaderViewController.swift */,
+				C390B0A122BB677200270A2B /* HorizontalSnappingController.swift */,
 			);
 			path = Apps;
 			sourceTree = "<group>";
@@ -335,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C32979CC2284252B00B0ED6D /* AppHeaderCell.swift in Sources */,
+				C390B0A422BB6C2F00270A2B /* SnappingLayout.swift in Sources */,
 				C3297991227F4C0400B0ED6D /* ViewController.swift in Sources */,
 				C397171022A0366400D9F832 /* SocialApp.swift in Sources */,
 				C329798F227F4C0400B0ED6D /* AppDelegate.swift in Sources */,
@@ -351,6 +358,7 @@
 				C32979C5228346FA00B0ED6D /* Extensions.swift in Sources */,
 				C32979CA228423AF00B0ED6D /* AppsHorizontalHeaderViewController.swift in Sources */,
 				C32979A1227F4C6D00B0ED6D /* BaseTabBarController.swift in Sources */,
+				C390B0A222BB677200270A2B /* HorizontalSnappingController.swift in Sources */,
 				C32979B8228338D900B0ED6D /* BaseCollectionViewController.swift in Sources */,
 				C32979A92281E83800B0ED6D /* SearchResultCell.swift in Sources */,
 				C32979AE2282B65C00B0ED6D /* VerticalStackView.swift in Sources */,

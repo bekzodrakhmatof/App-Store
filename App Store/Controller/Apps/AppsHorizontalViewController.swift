@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppsHorizontalViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class AppsHorizontalViewController: HozirontalSnappingController, UICollectionViewDelegateFlowLayout {
     
     fileprivate let cellID = "HorizontalControllerCellID"
     var appGroup: AppGroup?
@@ -23,10 +23,7 @@ class AppsHorizontalViewController: BaseCollectionViewController, UICollectionVi
         
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: cellID)
         
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            
-            layout.scrollDirection = .horizontal
-        }
+        collectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
