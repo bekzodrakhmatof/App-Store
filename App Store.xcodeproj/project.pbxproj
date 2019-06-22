@@ -34,6 +34,7 @@
 		C390B0A722BBFEF500270A2B /* AppDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390B0A622BBFEF500270A2B /* AppDetailController.swift */; };
 		C397170E22A024D200D9F832 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397170D22A024D200D9F832 /* AppGroup.swift */; };
 		C397171022A0366400D9F832 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397170F22A0366400D9F832 /* SocialApp.swift */; };
+		C3DCA0C922BE25FF00CEA8B9 /* AppDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		C390B0A622BBFEF500270A2B /* AppDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailController.swift; sourceTree = "<group>"; };
 		C397170D22A024D200D9F832 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 		C397170F22A0366400D9F832 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
+		C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailCell.swift; sourceTree = "<group>"; };
 		F03FB8D4FD6CB9C7B2D91B4D /* Pods-App Store.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Store.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App Store/Pods-App Store.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,6 +208,7 @@
 		C32979BC22833A8400B0ED6D /* Apps */ = {
 			isa = PBXGroup;
 			children = (
+				C3DCA0C722BE25D400CEA8B9 /* Details */,
 				C32979BE22833AA200B0ED6D /* AppsGroupCell.swift */,
 				C32979C22283463F00B0ED6D /* AppRowCell.swift */,
 				C32979C72284222500B0ED6D /* AppsPageHeaderView.swift */,
@@ -226,6 +229,14 @@
 			isa = PBXGroup;
 			children = (
 				C390B0A622BBFEF500270A2B /* AppDetailController.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		C3DCA0C722BE25D400CEA8B9 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -361,6 +372,7 @@
 				C32979AC2282B25C00B0ED6D /* UIView+Layout.swift in Sources */,
 				C32979A6228081EF00B0ED6D /* SearchViewController.swift in Sources */,
 				C32979C122833E7800B0ED6D /* AppsHorizontalViewController.swift in Sources */,
+				C3DCA0C922BE25FF00CEA8B9 /* AppDetailCell.swift in Sources */,
 				C32979C32283463F00B0ED6D /* AppRowCell.swift in Sources */,
 				C32979B42282E52500B0ED6D /* Service.swift in Sources */,
 				C32979B62283382600B0ED6D /* AppsPageViewController.swift in Sources */,
