@@ -9,10 +9,6 @@
 import UIKit
 
 class BaseCollectionViewController: UICollectionViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     init() {
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
