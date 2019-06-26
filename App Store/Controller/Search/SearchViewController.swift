@@ -25,6 +25,13 @@ class SearchViewController: BaseCollectionViewController, UICollectionViewDelega
         return label
     }()
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let appId = appResults[indexPath.item].trackId
+        let appDetailController = AppDetailController(appId: String(appId))
+        navigationController?.pushViewController(appDetailController, animated: true)
+    }
+    
     var timer: Timer?
 
     override func viewDidLoad() {
@@ -56,7 +63,7 @@ class SearchViewController: BaseCollectionViewController, UICollectionViewDelega
                 
                 if let error = error {
                     
-                    print("Failed to fetcg apps: ", error)
+                    print("Failed to fetch apps: ", error)
                     return
                 }
                 
