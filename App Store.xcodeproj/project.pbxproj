@@ -46,6 +46,7 @@
 		C397171022A0366400D9F832 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397170F22A0366400D9F832 /* SocialApp.swift */; };
 		C3D8444F22C5FE86008E1D6E /* AppFullScreenDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D8444E22C5FE86008E1D6E /* AppFullScreenDescriptionCell.swift */; };
 		C3DCA0C922BE25FF00CEA8B9 /* AppDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */; };
+		C3FA38EE22CB6A220016D164 /* TodayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FA38ED22CB6A220016D164 /* TodayItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		C397170F22A0366400D9F832 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
 		C3D8444E22C5FE86008E1D6E /* AppFullScreenDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFullScreenDescriptionCell.swift; sourceTree = "<group>"; };
 		C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailCell.swift; sourceTree = "<group>"; };
+		C3FA38ED22CB6A220016D164 /* TodayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		F03FB8D4FD6CB9C7B2D91B4D /* Pods-App Store.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Store.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App Store/Pods-App Store.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 				C397170D22A024D200D9F832 /* AppGroup.swift */,
 				C397170F22A0366400D9F832 /* SocialApp.swift */,
 				C32070C122C22D7F00291207 /* Reviews.swift */,
+				C3FA38ED22CB6A220016D164 /* TodayItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				C32979C122833E7800B0ED6D /* AppsHorizontalViewController.swift in Sources */,
 				C3DCA0C922BE25FF00CEA8B9 /* AppDetailCell.swift in Sources */,
 				C32979C32283463F00B0ED6D /* AppRowCell.swift in Sources */,
+				C3FA38EE22CB6A220016D164 /* TodayItem.swift in Sources */,
 				C3370B0E22C138FA00F5081D /* PreviewScreenshotsController.swift in Sources */,
 				C32979B42282E52500B0ED6D /* Service.swift in Sources */,
 				C32979B62283382600B0ED6D /* AppsPageViewController.swift in Sources */,
