@@ -10,11 +10,10 @@ import UIKit
 
 class TodayViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    fileprivate let cellId = "cellId"
-    
     let items = [
-        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently orginize your life the right way.", backgroundColor: .white),
-        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Travel without your packet so it will be easy to capture", backgroundColor: #colorLiteral(red: 0.9837816358, green: 0.9648348689, blue: 0.7342819571, alpha: 1))
+        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple),
+        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently orginize your life the right way.", backgroundColor: .white, cellType: .single),
+        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Travel without your packet so it will be easy to capture", backgroundColor: #colorLiteral(red: 0.9837816358, green: 0.9648348689, blue: 0.7342819571, alpha: 1), cellType: .single)
     ]
 
     override func viewDidLoad() {
@@ -23,7 +22,8 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         // Do any additional setup after loading the view.
         collectionView.backgroundColor = #colorLiteral(red: 0.9537332654, green: 0.9488452077, blue: 0.9571188092, alpha: 1)
         
-        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.CellType.single.rawValue)
+        collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
 
     }
     
@@ -117,8 +117,14 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! TodayCell
+        //multiple app cell
+        
+        let cellID = items[indexPath.item].cellType.rawValue
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! BaseTodayCell
+        
         cell.todayItem = items[indexPath.item]
+        
         return cell
     }
     
@@ -127,9 +133,11 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         return items.count
     }
     
+    static let cellSize: CGFloat = 500
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return .init(width: view.frame.width - 48, height: 450)
+        return .init(width: view.frame.width - 48, height: TodayViewController.cellSize)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

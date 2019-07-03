@@ -29,7 +29,7 @@ class AppFullScreenController: UITableViewController {
         
         if indexPath.row == 0 {
             
-            return 450
+            return TodayViewController.cellSize
         }
         
         return super.tableView(tableView, heightForRowAt: indexPath)
