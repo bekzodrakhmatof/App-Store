@@ -48,6 +48,8 @@
 		C3DCA0C922BE25FF00CEA8B9 /* AppDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */; };
 		C3F66AA722CCCDCC009ECB41 /* TodayMultipleAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F66AA622CCCDCC009ECB41 /* TodayMultipleAppCell.swift */; };
 		C3F66AA922CCD403009ECB41 /* BaseTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F66AA822CCD403009ECB41 /* BaseTodayCell.swift */; };
+		C3F66AAB22CCD555009ECB41 /* TodayMultipleAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F66AAA22CCD555009ECB41 /* TodayMultipleAppsViewController.swift */; };
+		C3F66AAD22CCD5B4009ECB41 /* MultipleAppCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F66AAC22CCD5B4009ECB41 /* MultipleAppCell.swift */; };
 		C3FA38EE22CB6A220016D164 /* TodayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3FA38ED22CB6A220016D164 /* TodayItem.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +98,8 @@
 		C3DCA0C822BE25FF00CEA8B9 /* AppDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailCell.swift; sourceTree = "<group>"; };
 		C3F66AA622CCCDCC009ECB41 /* TodayMultipleAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayMultipleAppCell.swift; sourceTree = "<group>"; };
 		C3F66AA822CCD403009ECB41 /* BaseTodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTodayCell.swift; sourceTree = "<group>"; };
+		C3F66AAA22CCD555009ECB41 /* TodayMultipleAppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayMultipleAppsViewController.swift; sourceTree = "<group>"; };
+		C3F66AAC22CCD5B4009ECB41 /* MultipleAppCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleAppCell.swift; sourceTree = "<group>"; };
 		C3FA38ED22CB6A220016D164 /* TodayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		F03FB8D4FD6CB9C7B2D91B4D /* Pods-App Store.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App Store.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App Store/Pods-App Store.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -262,6 +266,7 @@
 			children = (
 				C32C3EF022C39F5D00A4C1EF /* TodayViewController.swift */,
 				C32C3EF522C3B76200A4C1EF /* AppFullScreenController.swift */,
+				C3F66AAA22CCD555009ECB41 /* TodayMultipleAppsViewController.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				C319861722CA3748005F140C /* AppFullScreenHeaderCell.swift */,
 				C3F66AA622CCCDCC009ECB41 /* TodayMultipleAppCell.swift */,
 				C3F66AA822CCD403009ECB41 /* BaseTodayCell.swift */,
+				C3F66AAC22CCD5B4009ECB41 /* MultipleAppCell.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -433,6 +439,7 @@
 				C32979A6228081EF00B0ED6D /* SearchViewController.swift in Sources */,
 				C3D8444F22C5FE86008E1D6E /* AppFullScreenDescriptionCell.swift in Sources */,
 				C32C3EF422C39FCC00A4C1EF /* TodayCell.swift in Sources */,
+				C3F66AAD22CCD5B4009ECB41 /* MultipleAppCell.swift in Sources */,
 				C32070BC22C2180100291207 /* ReviewRowCell.swift in Sources */,
 				C319861822CA3748005F140C /* AppFullScreenHeaderCell.swift in Sources */,
 				C32979C122833E7800B0ED6D /* AppsHorizontalViewController.swift in Sources */,
@@ -451,6 +458,7 @@
 				C32979CA228423AF00B0ED6D /* AppsHorizontalHeaderViewController.swift in Sources */,
 				C32979A1227F4C6D00B0ED6D /* BaseTabBarController.swift in Sources */,
 				C390B0A722BBFEF500270A2B /* AppDetailController.swift in Sources */,
+				C3F66AAB22CCD555009ECB41 /* TodayMultipleAppsViewController.swift in Sources */,
 				C32C3EF622C3B76200A4C1EF /* AppFullScreenController.swift in Sources */,
 				C3F66AA922CCD403009ECB41 /* BaseTodayCell.swift in Sources */,
 				C390B0A222BB677200270A2B /* HorizontalSnappingController.swift in Sources */,
