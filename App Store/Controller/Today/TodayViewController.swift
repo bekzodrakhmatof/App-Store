@@ -80,6 +80,8 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        
+        tabBarController?.tabBar.superview?.setNeedsLayout()
     }
     
     var appFullScreenController: AppFullScreenController!
@@ -94,8 +96,8 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         if items[indexPath.item].cellType == .multiple {
             
             let fullController = TodayMultipleAppsViewController(mode: .fullcreen)
-            fullController.results = self.items[indexPath.item].apps
-            present(fullController, animated: true)
+            fullController.apps = self.items[indexPath.item].apps
+            present(BackEnabledNavigationController(rootViewController: fullController), animated: true)
             return
         }
         
@@ -183,7 +185,33 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         
         cell.todayItem = items[indexPath.item]
         
+        (cell as? TodayMultipleAppCell)?.multipleAppsController.collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleMultipleAppsTap)))
+        
         return cell
+    }
+    
+    @objc fileprivate func handleMultipleAppsTap(gesture: UIGestureRecognizer) {
+        
+        let collectionView = gesture.view
+        
+        var superview = collectionView?.superview
+        
+        while superview != nil {
+            
+            if let cell = superview as? TodayMultipleAppCell {
+                
+                guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
+                
+                let apps = self.items[indexPath.item].apps
+                
+                let fullController = TodayMultipleAppsViewController(mode: .fullcreen)
+                fullController.apps = apps
+                present(fullController, animated: true, completion: nil)
+                return
+            }
+            
+            superview = superview?.superview
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

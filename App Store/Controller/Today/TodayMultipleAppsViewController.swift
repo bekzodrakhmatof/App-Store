@@ -11,7 +11,7 @@ import UIKit
 class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let cellID = "cellID"
-    var results = [FeedResult]()
+    var apps = [FeedResult]()
     
     let closeButton: UIButton = {
         let button = UIButton(type: .system)
@@ -32,6 +32,7 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
         if mode == .fullcreen {
             
             setupCloseButton()
+            navigationController?.isNavigationBarHidden = true
         } else {
             collectionView.isScrollEnabled = false
         }
@@ -61,16 +62,16 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if mode == .fullcreen {
-            return results.count
+            return apps.count
         } else {
-            return min(4, results.count)
+            return min(4, apps.count)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! MultipleAppCell
-        cell.app = self.results[indexPath.item]
+        cell.app = self.apps[indexPath.item]
         return cell
     }
     
@@ -84,6 +85,13 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
         
         let height: CGFloat = (view.frame.height - 3 * spacing) / 4
         return .init(width: view.frame.width, height: height)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let appId = self.apps[indexPath.item].id
+        let appDeteilController = AppDetailController(appId: appId)
+        navigationController?.pushViewController(appDeteilController, animated: true)
     }
     
     fileprivate let spacing: CGFloat = 16
