@@ -12,24 +12,59 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
     
     let cellID = "cellID"
     var results = [FeedResult]()
+    
+    let closeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "close_button"), for: .normal)
+        button.tintColor = .darkGray
+        button.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc fileprivate func handleCloseButton() {
+        
+        dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if mode == .fullcreen {
+            
+            setupCloseButton()
+        } else {
+            collectionView.isScrollEnabled = false
+        }
+    
         collectionView.backgroundColor = .white
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView.isScrollEnabled = false
-//        Service.shared.fetchGames { (appGroup, error) in
-//            self.results = appGroup?.feed.results ?? []
-//            
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//            }
-//        }
+        
+    }
+    
+    override var prefersStatusBarHidden: Bool { return true}
+    
+    func setupCloseButton() {
+        
+        view.addSubview(closeButton)
+        closeButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 16, left: 0, bottom: 0, right: 16), size: .init(width: 44, height: 44))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        if mode == .fullcreen {
+            return .init(top: 12, left: 24, bottom: 12, right: 24)
+        }
+        
+        return .zero
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(4, results.count)
+        
+        if mode == .fullcreen {
+            return results.count
+        } else {
+            return min(4, results.count)
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -41,8 +76,13 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let height: CGFloat = (view.frame.height - 3 * spacing) / 4
+        if mode == .fullcreen {
+            
+            let height: CGFloat = 68
+            return .init(width: view.frame.width - 48, height: height)
+        }
         
+        let height: CGFloat = (view.frame.height - 3 * spacing) / 4
         return .init(width: view.frame.width, height: height)
     }
     
@@ -50,5 +90,20 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return spacing
+    }
+    
+    fileprivate let mode: Mode
+    
+    enum Mode {
+        case small, fullcreen
+    }
+    
+    init(mode: Mode) {
+        self.mode = mode
+        super.init()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

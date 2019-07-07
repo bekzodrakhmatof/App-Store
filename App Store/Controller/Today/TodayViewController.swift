@@ -91,6 +91,14 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        if items[indexPath.item].cellType == .multiple {
+            
+            let fullController = TodayMultipleAppsViewController(mode: .fullcreen)
+            fullController.results = self.items[indexPath.item].apps
+            present(fullController, animated: true)
+            return
+        }
+        
         let appFullScreenController = AppFullScreenController()
     
         appFullScreenController.todayItem = items[indexPath.row]
