@@ -19,13 +19,13 @@ class TodayMultipleAppsViewController: BaseCollectionViewController, UICollectio
         collectionView.backgroundColor = .white
         collectionView.register(MultipleAppCell.self, forCellWithReuseIdentifier: cellID)
         collectionView.isScrollEnabled = false
-        Service.shared.fetchGames { (appGroup, error) in
-            self.results = appGroup?.feed.results ?? []
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+//        Service.shared.fetchGames { (appGroup, error) in
+//            self.results = appGroup?.feed.results ?? []
+//            
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
+//        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

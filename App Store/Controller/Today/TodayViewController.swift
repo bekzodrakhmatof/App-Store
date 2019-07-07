@@ -10,21 +10,71 @@ import UIKit
 
 class TodayViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let items = [
-        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple),
-        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently orginize your life the right way.", backgroundColor: .white, cellType: .single),
-        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Travel without your packet so it will be easy to capture", backgroundColor: #colorLiteral(red: 0.9837816358, green: 0.9648348689, blue: 0.7342819571, alpha: 1), cellType: .single)
-    ]
+//    let items = [
+//        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple),
+//        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently orginize your life the right way.", backgroundColor: .white, cellType: .single),
+//        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Travel without your packet so it will be easy to capture", backgroundColor: #colorLiteral(red: 0.9837816358, green: 0.9648348689, blue: 0.7342819571, alpha: 1), cellType: .single)
+//    ]
+    var items = [TodayItem]()
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = .darkGray
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.centerInSuperview()
 
+        fetchData()
+        
         // Do any additional setup after loading the view.
         collectionView.backgroundColor = #colorLiteral(red: 0.9537332654, green: 0.9488452077, blue: 0.9571188092, alpha: 1)
         
         collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.CellType.single.rawValue)
         collectionView.register(TodayMultipleAppCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
 
+    }
+    
+    fileprivate func fetchData() {
+        
+        let dispatchGroup = DispatchGroup()
+        var topGrossingGroup: AppGroup?
+        var gamesGroup: AppGroup?
+        
+        dispatchGroup.enter()
+        Service.shared.fetchTopGrossing { (appGroup, error) in
+            
+            // Check error
+            topGrossingGroup = appGroup
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        Service.shared.fetchGames { (appGroup, error) in
+            
+            gamesGroup = appGroup
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            // I will have access
+            self.activityIndicatorView.stopAnimating()
+            
+            self.items = [
+                TodayItem.init(category: "Daily List", title: topGrossingGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple, apps: topGrossingGroup?.feed.results ?? []),
+                TodayItem.init(category: "Daily List", title: gamesGroup?.feed.title ?? "", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently orginize your life the right way.", backgroundColor: .white, cellType: .multiple, apps: gamesGroup?.feed.results ?? []),
+                TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Travel without your packet so it will be easy to capture", backgroundColor: #colorLiteral(red: 0.9837816358, green: 0.9648348689, blue: 0.7342819571, alpha: 1), cellType: .single, apps: [])
+            ]
+            
+            self.collectionView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
