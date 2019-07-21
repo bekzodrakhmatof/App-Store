@@ -123,21 +123,43 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         // Scroll
     }
     
+    var appFullScreenBeginOffset: CGFloat = 0
+    
     @objc fileprivate func handleDrag(gesture: UIPanGestureRecognizer) {
+        
+        if gesture.state == .began {
+            
+            appFullScreenBeginOffset = appFullScreenController.tableView.contentOffset.y
+        }
         
         let translationY = gesture.translation(in: appFullScreenController.view).y
         gesture.delegate = self
         
+        if appFullScreenController.tableView.contentOffset.y > 0 {
+            return
+        }
+        
         if gesture.state == .changed {
             
-            let scale = 1 - (translationY / 1000)
-            
-            let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
-            self.appFullScreenController.view.transform = transform
+            if translationY > 0 {
+                
+                let trueOffset = translationY - appFullScreenBeginOffset
+                
+                var scale = 1 - (trueOffset / 1000)
+                print(trueOffset)
+                scale = min(1, scale)
+                scale = max(0.8, scale)
+                
+                let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
+                self.appFullScreenController.view.transform = transform
+            }
             
         } else if gesture.state == .ended {
             
-            handleAppFullScreenDismissal()
+            if translationY > 0 {
+                
+                handleAppFullScreenDismissal()
+            }
         }
     }
     
@@ -226,6 +248,7 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
             self.tabBarController?.tabBar.transform = .identity
             
             guard let cell = self.appFullScreenController.tableView.cellForRow(at: [0,0]) as? AppFullScreenHeaderCell else { return }
+            cell.closeButton.alpha = 0
             cell.todayCell.topConstraint.constant = 24
             cell.layoutIfNeeded()
         }, completion: { _ in
