@@ -8,13 +8,8 @@
 
 import UIKit
 
-class TodayViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class TodayViewController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
     
-//    let items = [
-//        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: #imageLiteral(resourceName: "garden"), description: "", backgroundColor: .white, cellType: .multiple),
-//        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligently orginize your life the right way.", backgroundColor: .white, cellType: .single),
-//        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Travel without your packet so it will be easy to capture", backgroundColor: #colorLiteral(red: 0.9837816358, green: 0.9648348689, blue: 0.7342819571, alpha: 1), cellType: .single)
-//    ]
     var items = [TodayItem]()
     
     let activityIndicatorView: UIActivityIndicatorView = {
@@ -25,9 +20,15 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         aiv.hidesWhenStopped = true
         return aiv
     }()
+    
+    let blurVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.addSubview(blurVisualEffectView)
+        blurVisualEffectView.fillSuperview()
+        blurVisualEffectView.alpha = 0
         
         view.addSubview(activityIndicatorView)
         activityIndicatorView.centerInSuperview()
@@ -108,10 +109,41 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         
         appFullScreenController.todayItem = items[indexPath.row]
         appFullScreenController.dismissHandler = {
-            self.handleRemoveRedView()
+            self.handleAppFullScreenDismissal()
         }
         appFullScreenController.view.layer.cornerRadius = 16
         self.appFullScreenController = appFullScreenController
+        
+        // Setup pan gesture
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleDrag))
+        appFullScreenController.view.addGestureRecognizer(gesture)
+        
+        // add a blue effect
+        
+        // Scroll
+    }
+    
+    @objc fileprivate func handleDrag(gesture: UIPanGestureRecognizer) {
+        
+        let translationY = gesture.translation(in: appFullScreenController.view).y
+        gesture.delegate = self
+        
+        if gesture.state == .changed {
+            
+            let scale = 1 - (translationY / 1000)
+            
+            let transform: CGAffineTransform = .init(scaleX: scale, y: scale)
+            self.appFullScreenController.view.transform = transform
+            
+        } else if gesture.state == .ended {
+            
+            handleAppFullScreenDismissal()
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        return true
     }
     
     fileprivate func setupAppFullscreenStartingPosition(_ indexPath: IndexPath) {
@@ -144,6 +176,8 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
      
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             
+            self.blurVisualEffectView.alpha = 1
+            
             self.anchoredConstraint?.top?.constant = 0
             self.anchoredConstraint?.leading?.constant = 0
             self.anchoredConstraint?.width?.constant = self.view.frame.width
@@ -173,9 +207,12 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
     
     }
      
-    @objc func handleRemoveRedView() {
+    @objc func handleAppFullScreenDismissal() {
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            
+            self.blurVisualEffectView.alpha = 0
+            self.appFullScreenController.view.transform = .identity
             
             self.appFullScreenController.tableView.contentOffset = .zero
             guard let startingFrame = self.startingFrame else { return }
