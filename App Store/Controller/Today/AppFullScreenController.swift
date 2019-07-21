@@ -23,6 +23,15 @@ class AppFullScreenController: UIViewController, UITableViewDelegate, UITableVie
             scrollView.isScrollEnabled = false
             scrollView.isScrollEnabled = true
         }
+        
+        let translationY = -90 - UIApplication.shared.statusBarFrame.height
+        let transform = scrollView.contentOffset.y > 100 ? CGAffineTransform(translationX: 0, y: translationY) : .identity
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            
+            self.floatingContainer.transform = transform
+            
+        })
     }
 
     override func viewDidLoad() {
@@ -48,18 +57,30 @@ class AppFullScreenController: UIViewController, UITableViewDelegate, UITableVie
         setupFloatingControls()
     }
     
+    let floatingContainer = UIView()
+    
+    @objc fileprivate func handleTap() {
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            
+            self.floatingContainer.transform = .init(translationX: 0, y: -90)
+        })
+    }
+    
     fileprivate func setupFloatingControls() {
         
-        let floatingContainer = UIView()
+        
         floatingContainer.layer.cornerRadius = 16
         floatingContainer.clipsToBounds = true
         view.addSubview(floatingContainer)
         let bottomPadding = UIApplication.shared.statusBarFrame.height
-        floatingContainer.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: bottomPadding, right: 16), size: .init(width: 0, height: 90))
+        floatingContainer.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: -100, right: 16), size: .init(width: 0, height: 90))
         
         let blurVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
         floatingContainer.addSubview(blurVisualEffectView)
         blurVisualEffectView.fillSuperview()
+        
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
         
         //addSubviews
         
