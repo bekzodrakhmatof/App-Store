@@ -116,7 +116,7 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
         
         // Setup pan gesture
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(handleDrag))
-        appFullScreenController.view.addGestureRecognizer(gesture)
+        appFullScreenController.tableView.addGestureRecognizer(gesture)
         
         // add a blue effect
         
@@ -248,7 +248,7 @@ class TodayViewController: BaseCollectionViewController, UICollectionViewDelegat
             self.tabBarController?.tabBar.transform = .identity
             
             guard let cell = self.appFullScreenController.tableView.cellForRow(at: [0,0]) as? AppFullScreenHeaderCell else { return }
-            cell.closeButton.alpha = 0
+            self.appFullScreenController.closeButton.alpha = 0
             cell.todayCell.topConstraint.constant = 24
             cell.layoutIfNeeded()
         }, completion: { _ in
