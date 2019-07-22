@@ -74,7 +74,7 @@ class AppFullScreenController: UIViewController, UITableViewDelegate, UITableVie
         floatingContainer.clipsToBounds = true
         view.addSubview(floatingContainer)
         let bottomPadding = UIApplication.shared.statusBarFrame.height
-        floatingContainer.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: -100, right: 16), size: .init(width: 0, height: 90))
+        floatingContainer.anchor(top: nil, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: 0, left: 16, bottom: -bottomPadding, right: 16), size: .init(width: 0, height: 90))
         
         let blurVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
         floatingContainer.addSubview(blurVisualEffectView)
