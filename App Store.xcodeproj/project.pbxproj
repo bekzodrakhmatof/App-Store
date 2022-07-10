@@ -645,7 +645,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y77A582JHV;
+				DEVELOPMENT_TEAM = N2596X9WTB;
 				INFOPLIST_FILE = "App Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -664,7 +664,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y77A582JHV;
+				DEVELOPMENT_TEAM = N2596X9WTB;
 				INFOPLIST_FILE = "App Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
